@@ -21,6 +21,10 @@
                     <h:inputText id="price" value="#{lineItemController.selected.price}" title="#{bundle.EditLineItemTitle_price}" />
                     <h:outputLabel value="#{bundle.EditLineItemLabel_quantity}" for="quantity" />
                     <h:inputText id="quantity" value="#{lineItemController.selected.quantity}" title="#{bundle.EditLineItemTitle_quantity}" />
+                    <h:outputLabel value="#{bundle.EditLineItemLabel_product}" for="product" />
+                    <h:selectOneMenu id="product" value="#{lineItemController.selected.product}" title="#{bundle.EditLineItemTitle_product}" >
+                        <f:selectItems value="#{productController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{lineItemController.update}" value="#{bundle.EditLineItemSaveLink}"/>
                 <br />

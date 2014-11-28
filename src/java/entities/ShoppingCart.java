@@ -82,11 +82,16 @@ public class ShoppingCart implements Serializable {
     }
 
     public double getTotalPrice() {
+         totalPrice=0;
+         for(LineItem li:this.lineItems){
+            this.totalPrice+=li.getPrice();
+        }
         return totalPrice;
     }
 
     public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+       this.totalPrice=totalPrice;
+        
     }
 
     public List<LineItem> getLineItems() {
@@ -95,6 +100,10 @@ public class ShoppingCart implements Serializable {
 
     public void setLineItems(List<LineItem> lineItems) {
         this.lineItems = lineItems;
+    }
+    
+    public int size(){
+       return  this.lineItems.size();
     }
     
 }

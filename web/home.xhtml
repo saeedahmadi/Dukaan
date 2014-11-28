@@ -58,6 +58,12 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
+                    <li> 
+                        <h:link value="Shopping Cart #{shoppingCart.size()}" outcome="shoppingCart/ViewShoppingCart"></h:link>
+                    </li>
+                    <li> 
+                        <h:link value="Welcome#{customer.user.username}" outcome="shoppingCart/ViewShoppingCart"></h:link>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

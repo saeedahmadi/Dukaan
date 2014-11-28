@@ -6,8 +6,10 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,9 +36,9 @@ public class Customer implements Serializable {
     @OneToMany
     @JoinColumn(name="customer_id")
     private List<Account> account;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="customer_id")
     private List<Order> orders;
     @OneToOne
@@ -49,6 +51,14 @@ public class Customer implements Serializable {
     private Date dob;
     private String email;
     private String phone;
+
+    public Customer() {
+        this.user=new WebUser();
+        this.address=new Address();
+        this.orders=new ArrayList<Order>();
+    }
+    
+    
 
     public Long getId() {
         return id;

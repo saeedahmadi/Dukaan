@@ -4,6 +4,9 @@ import entities.Customer;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.CustomerFacade;
+import static com.sun.faces.facelets.util.Path.context;
+import entities.ShoppingCart;
+import entities.WebUser;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -35,6 +38,7 @@ public class CustomerController implements Serializable {
     public Customer getSelected() {
         if (current == null) {
             current = new Customer();
+            
             selectedItemIndex = -1;
         }
         return current;
@@ -81,13 +85,20 @@ public class CustomerController implements Serializable {
 
     public String create() {
         try {
-            getFacade().create(current);
+            FacesContext context = FacesContext.getCurrentInstance();
+            ShoppingCart sc =(ShoppingCart) context.getExternalContext().getSessionMap().get("shoppingCart");
+            current.setShoppingCart(sc);
+            current = getFacade().edit(current);
+            context.getExternalContext().getSessionMap().put("customer", current);
+            context.getExternalContext().getSessionMap().put("shoppingCart", current.getShoppingCart());
+
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CustomerCreated"));
-            return prepareCreate();
+            return "/account/CreateAccount";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+           
         }
+         return "/account/CreateAccount";
     }
 
     public String prepareEdit() {

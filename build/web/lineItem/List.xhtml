@@ -40,6 +40,12 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLineItemTitle_product}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.product}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
                             <h:commandLink action="#{lineItemController.prepareView}" value="#{bundle.ListLineItemViewLink}"/>

@@ -246,13 +246,39 @@ public class ProductController implements Serializable {
     }
     @EJB
     ShoppingCartFacade scFacade;
+    LineItem lineItem = new LineItem();
+    
     public String addToCart(){
-        ShoppingCart sc = new ShoppingCart();
-        LineItem li = new LineItem();
-        li.setProduct(this.currentProduct);
-        sc.getLineItems().add(li);
-        scFacade.create(sc);
+        FacesContext context = FacesContext.getCurrentInstance();
+        ShoppingCart sc=null;
+        if(!context.getExternalContext().getSessionMap().containsKey("shoppingCart")){
+            sc = new ShoppingCart();
+            sc =  (ShoppingCart) context.getExternalContext().getSessionMap().put("shoppingCart", sc);
+        }
         
+        sc =(ShoppingCart) context.getExternalContext().getSessionMap().get("shoppingCart");
+        
+        //LineItem lineItem = new LineItem();
+        lineItem.setProduct(this.currentProduct);
+        //li.setQuantity(10);
+        
+        sc.getLineItems().add(lineItem);
+        sc = scFacade.edit(sc);
+        sc =  (ShoppingCart) context.getExternalContext().getSessionMap().put("shoppingCart", sc);
+
     return "/home";
     }
+    
+    public String checkOut(){
+        return "customer/CreateCustomer";
+    }
+
+    public LineItem getLineItem() {
+        return lineItem;
+    }
+
+    public void setLineItem(LineItem lineItem) {
+        this.lineItem = lineItem;
+    }
+    
 }

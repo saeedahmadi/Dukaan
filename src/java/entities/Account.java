@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,11 +26,17 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     private Address address;
     private long accountNumber;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date expiryDate;
+
+    public Account() {
+        address = new Address();
+    }
+    
+    
 
     public Address getAddress() {
         return address;

@@ -8,6 +8,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,7 @@ import javax.persistence.Temporal;
  *
  * @author Saeed Ahmadi
  */
-@Entity
+@Entity(name = "COrder")
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,7 +63,7 @@ public class Order implements Serializable {
     public void setLineItems(List<LineItem> lineItems) {
         this.lineItems = lineItems;
     }
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="order_id")
     private List<LineItem> lineItems;
     

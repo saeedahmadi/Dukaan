@@ -27,6 +27,8 @@
                     <h:outputText value="#{productController.currentProduct.price}" title="#{bundle.ViewProductTitle_price}"/>
                     <h:outputText value="#{bundle.ViewProductLabel_id}"/>
                     <h:outputText value="#{productController.currentProduct.id}" title="#{bundle.ViewProductTitle_id}"/>
+                    <h:outputLabel value="#{bundle.CreateLineItemLabel_quantity}" for="quantity" />
+                    <h:inputText id="quantity" value="#{productController.lineItem.quantity}" title="#{bundle.CreateLineItemTitle_quantity}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{productController.addToCart()}" value="AddToCart"/>
