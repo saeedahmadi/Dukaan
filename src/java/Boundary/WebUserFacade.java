@@ -9,6 +9,7 @@ import entities.WebUser;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +27,15 @@ public class WebUserFacade extends AbstractFacade<WebUser> {
 
     public WebUserFacade() {
         super(WebUser.class);
+    }
+    
+    public WebUser find(String username, String password){
+        Query q = em.createQuery("Select u from WebUser u where u.username = :username and u.password = :password",WebUser.class);
+        q.setParameter("username", username);
+        q.setParameter("password", password);
+        WebUser user = (WebUser) q.getSingleResult();
+        
+        return user;
     }
     
 }

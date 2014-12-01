@@ -32,6 +32,13 @@ public class Order implements Serializable {
     private double salesTax;
     private double totalPrice;
 
+    public Order() {
+        this.salesTax=9.5;
+        this.orderDate=new Date();
+    }
+    
+    
+
     public Date getOrderDate() {
         return orderDate;
     }
@@ -41,6 +48,7 @@ public class Order implements Serializable {
     }
 
     public double getSalesTax() {
+        
         return salesTax;
     }
 
@@ -49,7 +57,11 @@ public class Order implements Serializable {
     }
 
     public double getTotalPrice() {
-        return totalPrice;
+        this.totalPrice=0.0;
+        for(LineItem li : lineItems){
+            this.totalPrice=+li.getPrice();
+        }
+        return this.totalPrice+=((totalPrice*getSalesTax())/100);
     }
 
     public void setTotalPrice(double totalPrice) {

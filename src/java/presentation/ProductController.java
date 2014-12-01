@@ -270,7 +270,13 @@ public class ProductController implements Serializable {
     }
     
     public String checkOut(){
-        return "customer/CreateCustomer";
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if(!context.getExternalContext().getSessionMap().containsKey("customer")){
+            return "/customer/CreateCustomer";
+        }
+        
+        return "/order/OrderConfirm";
     }
 
     public LineItem getLineItem() {

@@ -92,7 +92,10 @@ public class OrderController implements Serializable {
             customer.getShoppingCart().setLineItems(new ArrayList<LineItem>());
             customer.getOrders().add(current);
             customer = customerFacade.edit(customer);
+            customer.getUser().setLoginStatus(true);
             context.getExternalContext().getSessionMap().put("customer", customer);
+            context.getExternalContext().getSessionMap().put("shoppingCart", customer.getShoppingCart());
+
             //getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OrderCreated"));
             return "/home";

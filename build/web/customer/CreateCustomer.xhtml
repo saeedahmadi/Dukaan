@@ -25,10 +25,11 @@
                     <h:inputText id="password" value="#{customerController.selected.user.password}" title="#{bundle.CreateWebUserTitle_password}" />
                     <h:outputLabel value="#{bundle.CreateCustomerLabel_name}" for="name" />
                     <h:inputText id="name" value="#{customerController.selected.name}" title="#{bundle.CreateCustomerTitle_name}" />
-                    <h:outputLabel value="#{bundle.CreateCustomerLabel_dob}" for="dob" />
-                    <h:inputText id="dob" value="#{customerController.selected.dob}" title="#{bundle.CreateCustomerTitle_dob}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
+                    
+                    <p:outputLabel for="dob" value="#{bundle.CreateCustomerLabel_dob}" />
+                    <p:calendar id="dob" value="#{customerController.selected.dob}" />
+                    
+                   
                     <h:outputLabel value="#{bundle.CreateCustomerLabel_email}" for="email" />
                     <h:inputText id="email" value="#{customerController.selected.email}" title="#{bundle.CreateCustomerTitle_email}" />
                     <h:outputLabel value="#{bundle.CreateCustomerLabel_phone}" for="phone" />
@@ -54,14 +55,7 @@
                     
                     
                     
-                    <h:outputLabel value="#{bundle.CreateCustomerLabel_shoppingCart}" for="shoppingCart" />
-                    <h:selectOneMenu id="shoppingCart" value="#{customerController.selected.shoppingCart}" title="#{bundle.CreateCustomerTitle_shoppingCart}" >
-                        <f:selectItems value="#{shoppingCartController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateCustomerLabel_affilate}" for="affilate" />
-                    <h:selectOneMenu id="affilate" value="#{customerController.selected.affilate}" title="#{bundle.CreateCustomerTitle_affilate}" >
-                        <f:selectItems value="#{affiliateController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                   
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{customerController.create}" value="#{bundle.CreateCustomerSaveLink}" />

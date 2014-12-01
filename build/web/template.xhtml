@@ -10,6 +10,11 @@
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
         <h:outputStylesheet library="css" name="shop-homepage.css"/>
 
+         <!-- jQuery -->
+    <script src="/Dukaan/resources/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/Dukaan/resources/js/bootstrap.min.js"></script>
     </h:head>
 
     <h:body>
@@ -19,6 +24,7 @@
 		  <ui:include src="/commonHeader.html" />
 		</ui:insert>
 	</div>
+        <div id="content" >
         <h1>
             <ui:insert name="title">Default Title</ui:insert>
         </h1>
@@ -26,12 +32,13 @@
             <ui:insert name="body">Default Body</ui:insert>
              
         </p>
-        
+        </div>
         <div id="footer">
 	    	<ui:insert name="footer" >
 	    	  <ui:include src="/commonFooter.html" />
 	    	</ui:insert>
     	</div>
+        
     </h:body>
 
 </html>

@@ -13,7 +13,7 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            
+            <div class="col-md-9">
                 <h:form>
                      <h:outputLabel value="Total Price: " />
                      <h:outputText value="#{shoppingCart.totalPrice}$" title="Total Price"/>
@@ -36,7 +36,7 @@
                 </h:panelGrid>
                 </ui:repeat>
                 <br />
-                <h:link outcome="/customer/CreateCustomer" value="CheckOut"/>
+                <h:link outcome="#{productController.checkOut()}" value="CheckOut"/>
                 <br />
                 <br />
                 
@@ -44,7 +44,7 @@
                 <h:link outcome="/index" value="#{bundle.ViewProductIndexLink}"/>
 
             </h:form>
-
+            </div>    
             
         </ui:define>
     </ui:composition>

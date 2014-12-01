@@ -8,6 +8,7 @@ import Boundary.WebUserFacade;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -17,6 +18,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "webUserController")
 @SessionScoped
@@ -228,4 +230,26 @@ public class WebUserController implements Serializable {
 
     }
 
+    public String authenticate(){
+        WebUser user = getFacade().find(current.getUsername(),current.getPassword());
+        if(user==null){
+            
+            return "login";
+
+        }
+        user.setLoginStatus(true);
+         FacesContext context = FacesContext.getCurrentInstance();
+
+         context.getExternalContext().getSessionMap().put("customer", user.getCustomer());
+         context.getExternalContext().getSessionMap().put("shoppingCart", user.getCustomer().getShoppingCart());
+        return "home";
+    }
+    
+    public String logout(){
+         FacesContext context = FacesContext.getCurrentInstance();
+         context.getExternalContext().getSessionMap().remove("shoppingCart");
+         context.getExternalContext().getSessionMap().remove("customer");
+         //((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession()).invalidate();
+        return "/login";
+    }
 }

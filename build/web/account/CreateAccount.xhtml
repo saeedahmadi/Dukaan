@@ -18,12 +18,12 @@
                 <h:panelGrid columns="1">
                      <p:fieldset legend="Credit Card Details" style="margin-bottom:20px">
                         <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputLabel value="#{bundle.CreateAccountLabel_accountNumber}" for="accountNumber" />
-                    <h:inputText id="accountNumber" value="#{accountController.selected.accountNumber}" title="#{bundle.CreateAccountTitle_accountNumber}" />
-                    <h:outputLabel value="#{bundle.CreateAccountLabel_expiryDate}" for="expiryDate" />
-                    <h:inputText id="expiryDate" value="#{accountController.selected.expiryDate}" title="#{bundle.CreateAccountTitle_expiryDate}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
+                   
+                    <p:outputLabel value="#{bundle.CreateAccountLabel_accountNumber}" for="accountNumber" />
+                    <p:inputMask id="accountNumber" value="#{accountController.selected.accountNumber}" mask="9999-9999-9999-9999" title="#{bundle.CreateAccountTitle_accountNumber}"/>
+                    <p:outputLabel value="#{bundle.CreateAccountLabel_expiryDate}" for="expiryDate" />
+                    <p:calendar id="expiryDate" value="#{accountController.selected.expiryDate}" title="#{bundle.CreateAccountTitle_expiryDate}" />
+                    
                         </h:panelGrid>
 
                       </p:fieldset>

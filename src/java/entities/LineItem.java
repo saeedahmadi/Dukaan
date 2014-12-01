@@ -27,6 +27,11 @@ public class LineItem implements Serializable {
     private int quantity;
     @OneToOne(cascade = CascadeType.ALL)
     private Product product;
+
+    public LineItem() {
+        this.quantity=1;
+    }
+    
     
     public Long getId() {
         return id;

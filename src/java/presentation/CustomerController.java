@@ -4,9 +4,7 @@ import entities.Customer;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.CustomerFacade;
-import static com.sun.faces.facelets.util.Path.context;
 import entities.ShoppingCart;
-import entities.WebUser;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -84,6 +82,7 @@ public class CustomerController implements Serializable {
     }
 
     public String create() {
+        
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             ShoppingCart sc =(ShoppingCart) context.getExternalContext().getSessionMap().get("shoppingCart");

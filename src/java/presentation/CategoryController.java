@@ -31,12 +31,17 @@ public class CategoryController implements Serializable {
     private int selectedItemIndex;
 
     public CategoryController() {
+        
     }
 
     public Category getSelected() {
         if (current == null) {
             current = new Category();
+            getItems().setRowIndex(0);
+            current = (Category) getItems().getRowData();
             selectedItemIndex = -1;
+            //current=defaultCategory();
+            
         }
         return current;
     }
@@ -79,6 +84,8 @@ public class CategoryController implements Serializable {
     public String prepareView1() {
         current = (Category) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        System.out.println(selectedItemIndex);
+        
         return null;
     }
     public String prepareCreate() {
@@ -161,11 +168,12 @@ public class CategoryController implements Serializable {
             current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
-
+   
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
+       
         return items;
     }
 

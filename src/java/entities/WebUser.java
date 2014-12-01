@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  *
@@ -24,12 +25,19 @@ public class WebUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @Transient
+    private boolean loginStatus;
     private String username;
     private String password;
     @OneToOne(mappedBy = "user")
     private Customer customer;
     
     private Role role;
+
+    public WebUser() {
+        this.role=Role.Customer;
+    }
+    
 
     public Customer getCustomer() {
         return customer;
@@ -94,6 +102,14 @@ public class WebUser implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(boolean loginStatus) {
+        this.loginStatus = loginStatus;
     }
     
 }

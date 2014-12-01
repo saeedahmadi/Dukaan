@@ -28,7 +28,7 @@ public class Account implements Serializable {
     
     @OneToOne (cascade = CascadeType.ALL)
     private Address address;
-    private long accountNumber;
+    private String accountNumber;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date expiryDate;
 
@@ -46,11 +46,11 @@ public class Account implements Serializable {
         this.address = address;
     }
 
-    public long getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(long accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
