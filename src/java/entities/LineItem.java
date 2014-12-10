@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,15 +25,20 @@ public class LineItem implements Serializable {
     private Long id;
     private double price;
     private int quantity;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Product product;
+
+    public LineItem() {
+        this.quantity=1;
+    }
+    
     
     public Long getId() {
         return id;
     }
 
     public double getPrice() {
-        return price;
+        return this.price = this.product.getPrice()*this.quantity;
     }
 
     public void setPrice(double price) {

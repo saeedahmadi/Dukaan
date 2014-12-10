@@ -1,10 +1,12 @@
 package presentation;
 
+import Boundary.CustomerFacade;
 import entities.Product;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.ProductFacade;
 import Boundary.ShoppingCartFacade;
+import entities.Customer;
 import entities.LineItem;
 import entities.ShoppingCart;
 
@@ -246,13 +248,52 @@ public class ProductController implements Serializable {
     }
     @EJB
     ShoppingCartFacade scFacade;
+    LineItem lineItem = new LineItem();
+    
+    @EJB
+    CustomerFacade customerFacade;
     public String addToCart(){
-        ShoppingCart sc = new ShoppingCart();
-        LineItem li = new LineItem();
-        li.setProduct(this.currentProduct);
-        sc.getLineItems().add(li);
-        scFacade.create(sc);
+        FacesContext context = FacesContext.getCurrentInstance();
+        ShoppingCart sc;
+        if(!context.getExternalContext().getSessionMap().containsKey("shoppingCart")){
+            sc = new ShoppingCart();
+            sc =  (ShoppingCart) context.getExternalContext().getSessionMap().put("shoppingCart", sc);
+        }
         
+        sc =(ShoppingCart) context.getExternalContext().getSessionMap().get("shoppingCart");
+        
+        LineItem lineItem1 = new LineItem();
+        lineItem1.setProduct(this.currentProduct);
+        lineItem1.setQuantity(lineItem.getQuantity());
+        sc.getLineItems().add(lineItem1);
+        //sc = scFacade.edit(sc);
+        Customer customer = (Customer) context.getExternalContext().getSessionMap().get("customer");
+        if(customer!=null){
+            sc = scFacade.edit(sc);
+            customer.setShoppingCart(sc);
+         }
+
+        context.getExternalContext().getSessionMap().put("shoppingCart", sc);
+
     return "/home";
     }
+    
+    public String checkOut(){
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if(!context.getExternalContext().getSessionMap().containsKey("customer")){
+            return "/customer/CreateCustomer";
+        }
+        
+        return "/order/OrderConfirm";
+    }
+
+    public LineItem getLineItem() {
+        return lineItem;
+    }
+
+    public void setLineItem(LineItem lineItem) {
+        this.lineItem = lineItem;
+    }
+    
 }

@@ -21,6 +21,8 @@
                     <h:outputText value="#{lineItemController.selected.price}" title="#{bundle.ViewLineItemTitle_price}"/>
                     <h:outputText value="#{bundle.ViewLineItemLabel_quantity}"/>
                     <h:outputText value="#{lineItemController.selected.quantity}" title="#{bundle.ViewLineItemTitle_quantity}"/>
+                    <h:outputText value="#{bundle.ViewLineItemLabel_product}"/>
+                    <h:outputText value="#{lineItemController.selected.product}" title="#{bundle.ViewLineItemTitle_product}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{lineItemController.destroyAndView}" value="#{bundle.ViewLineItemDestroyLink}"/>

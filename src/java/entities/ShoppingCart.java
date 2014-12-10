@@ -5,12 +5,14 @@
  */
 package entities;
 
+import commons.ShoppingCartPriceCalculator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +25,7 @@ import javax.persistence.Temporal;
  * @author Saeed Ahmadi
  */
 @Entity
+@EntityListeners(ShoppingCartPriceCalculator.class)
 public class ShoppingCart implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -31,7 +34,7 @@ public class ShoppingCart implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date creationDate;
     private double totalPrice;
-     @OneToMany (cascade = CascadeType.ALL)
+     @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true)
      @JoinColumn(name="cart_id")
     private List<LineItem> lineItems;
 
@@ -82,11 +85,18 @@ public class ShoppingCart implements Serializable {
     }
 
     public double getTotalPrice() {
+        if(this.id==null){
+         totalPrice=0;
+         for(LineItem li:this.lineItems){
+            this.totalPrice+=li.getPrice();
+            }
+        }
         return totalPrice;
     }
 
     public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+       this.totalPrice=totalPrice;
+        
     }
 
     public List<LineItem> getLineItems() {
@@ -96,5 +106,11 @@ public class ShoppingCart implements Serializable {
     public void setLineItems(List<LineItem> lineItems) {
         this.lineItems = lineItems;
     }
+    
+    public int size(){
+       return  this.lineItems.size();
+    }
+    
+    
     
 }

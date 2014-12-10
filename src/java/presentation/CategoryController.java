@@ -6,6 +6,7 @@ import presentation.util.PaginationHelper;
 import Boundary.CategoryFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -31,12 +32,18 @@ public class CategoryController implements Serializable {
     private int selectedItemIndex;
 
     public CategoryController() {
+        
     }
 
     public Category getSelected() {
         if (current == null) {
             current = new Category();
+            recreateModel();
+            getItems().setRowIndex(0);
+            current = (Category) getItems().getRowData();
             selectedItemIndex = -1;
+            //current=defaultCategory();
+            
         }
         return current;
     }
@@ -79,7 +86,20 @@ public class CategoryController implements Serializable {
     public String prepareView1() {
         current = (Category) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        System.out.println(selectedItemIndex);
+        
         return null;
+    }
+    Category testCategory;
+    
+    public Category selectCategory(Object id){
+        testCategory = getFacade().find(id);
+        return testCategory;
+    }
+    
+    public List<Category> getCategories(){
+       return  getFacade().findAll();
+         
     }
     public String prepareCreate() {
         current = new Category();
@@ -161,11 +181,12 @@ public class CategoryController implements Serializable {
             current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
-
+   
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
+       
         return items;
     }
 
@@ -244,5 +265,17 @@ public class CategoryController implements Serializable {
     public void setCurrent(Category current) {
         this.current = current;
     }
+
+    public Category getTestCategory() {
+        if(testCategory==null){
+            selectCategory(new Long(1));
+        }
+        return testCategory;
+    }
+
+    public void setTestCategory(Category testCategory) {
+        this.testCategory = testCategory;
+    }
+    
 
 }

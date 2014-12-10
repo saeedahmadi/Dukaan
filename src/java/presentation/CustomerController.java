@@ -4,6 +4,10 @@ import entities.Customer;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.CustomerFacade;
+import Boundary.WebUserFacade;
+import entities.Address;
+import entities.ShoppingCart;
+import entities.WebUser;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -28,13 +32,16 @@ public class CustomerController implements Serializable {
     private Boundary.CustomerFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    private Address address;
     public CustomerController() {
+        address = new Address();
+        
     }
 
     public Customer getSelected() {
         if (current == null) {
             current = new Customer();
+            
             selectedItemIndex = -1;
         }
         return current;
@@ -78,16 +85,36 @@ public class CustomerController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
-
+    
+    public String edit(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        Customer customer =(Customer) context.getExternalContext().getSessionMap().get("customer");
+        getFacade().edit(customer);
+        return "/home";
+    }
     public String create() {
+        
         try {
-            getFacade().create(current);
+            FacesContext context = FacesContext.getCurrentInstance();
+            ShoppingCart sc =(ShoppingCart) context.getExternalContext().getSessionMap().get("shoppingCart");
+            
+            //getFacade().create(current);
+            current.setShoppingCart(sc);
+            current.getAddress().add(address);
+            current = getFacade().edit(current);
+            current.getUser().setLoginStatus(true);
+            
+
+            context.getExternalContext().getSessionMap().put("customer", current);
+            context.getExternalContext().getSessionMap().put("shoppingCart", current.getShoppingCart());
+
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CustomerCreated"));
-            return prepareCreate();
+            return "/account/CreateAccount";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+           
         }
+         return "/account/CreateAccount";
     }
 
     public String prepareEdit() {
@@ -226,6 +253,14 @@ public class CustomerController implements Serializable {
             }
         }
 
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
 }

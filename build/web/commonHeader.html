@@ -17,13 +17,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Welcome to Dukaan</a>
+                <h:graphicImage value="/resources/logo.png" width="100" height="75" alt=""/>
+
+                
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <h:form id="linkform" rendered="true" immediate="true">
+                   
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="/Dukaan/faces/home.xhtml">About</a>
+                    </li>
+                     <li>
+                        <a href="/Dukaan/faces/home.xhtml">Total Users : #{count}</a>
                     </li>
                     <li>
                         <a href="#">Services</a>
@@ -31,7 +38,26 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
+                    <li> 
+                        <h:link value="Shopping Cart #{shoppingCart.size()}" outcome="/shoppingCart/ViewShoppingCart"></h:link>
+                    </li>
+                    <li> 
+                        <h:link value="Welcome #{customer.user.username}" rendered="#{customer.user.loginStatus}" outcome="/shoppingCart/ViewShoppingCart"></h:link>
+                    </li>
+                    <li>
+                        <h:link value="Login" outcome="/login" rendered="#{!customer.user.loginStatus}"></h:link>
+                    </li>
+                    <li>
+                        <h:commandLink action="#{webUserController.logout()}" id="logout" value="Logout" rendered="#{customer.user.loginStatus}"  immediate="true"/>
+                    </li>
+                       <li>
+                        <h:link value="Edit Profile" outcome="/customer/EditProfile" id="editProfile"  rendered="#{customer.user.loginStatus}"  immediate="true"/>
+                    </li>
+                    <li>
+                        <h:commandLink action="#{webUserController.logout()}" id="affiliate" value="Become Affiliate" rendered="#{customer.user.role=='Customer'}"  immediate="true"/>
+                    </li>
                 </ul>
+                </h:form>
             </div>
             <!-- /.navbar-collapse -->
         </div>

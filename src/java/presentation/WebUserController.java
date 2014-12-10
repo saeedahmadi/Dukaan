@@ -4,10 +4,13 @@ import entities.WebUser;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.WebUserFacade;
+import commons.EmailSender;
+import interceptors.LoggingInterceptor;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -17,6 +20,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.interceptor.Interceptors;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "webUserController")
 @SessionScoped
@@ -26,6 +31,7 @@ public class WebUserController implements Serializable {
     private DataModel items = null;
     @EJB
     private Boundary.WebUserFacade ejbFacade;
+    
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -227,5 +233,35 @@ public class WebUserController implements Serializable {
         }
 
     }
+    @EJB 
+    EmailSender emailSender;
+   
+    public String authenticate() throws Exception{
+        WebUser user = getFacade().find(current.getUsername(),current.getPassword());
+        if(user==null){
+            JsfUtil.addSuccessMessage("Bad username or password");
+            return "login";
 
+        }
+         
+         
+         user.setLoginStatus(true);
+         FacesContext context = FacesContext.getCurrentInstance();
+         System.out.println(user.getCustomer().getName());
+         context.getExternalContext().getSessionMap().put("customer", user.getCustomer());
+         context.getExternalContext().getSessionMap().put("shoppingCart", user.getCustomer().getShoppingCart());
+         emailSender.sendEmail("Hello", "Login Successful", 
+                 user.getCustomer().getEmail(), "mumyogastudio@gmail.com");
+        return "home";
+    }
+    
+    public String logout(){
+
+         FacesContext context = FacesContext.getCurrentInstance();
+         context.getExternalContext().getSessionMap().remove("shoppingCart");
+         context.getExternalContext().getSessionMap().remove("customer");
+        //((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession()).invalidate();
+        
+        return "/login";
+    }
 }

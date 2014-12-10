@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 /**
  *
@@ -29,6 +30,7 @@ public class Category implements Serializable {
     private String description;
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @JoinColumn(name="cat_id")
+    @OrderBy("name ASCE")
     private List<Product> products;
 
     public String getTitle() {

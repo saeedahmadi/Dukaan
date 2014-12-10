@@ -6,8 +6,10 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,29 +28,39 @@ public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    
-    @OneToOne
+    private Long id;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private WebUser user;
-    @OneToOne
-    private Address address;
-    @OneToMany
+    @OneToMany (cascade = CascadeType.ALL)
+    @JoinColumn(name="customer_id")
+    private List<Address> address;
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="customer_id")
     private List<Account> account;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="customer_id")
     private List<Order> orders;
     @OneToOne
     private Affiliate affilate;
     
-    private Long id;
     
     private String name;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dob;
     private String email;
     private String phone;
+
+    public Customer() {
+        this.user=new WebUser();
+        this.address=new ArrayList<Address>();
+        this.orders=new ArrayList<Order>();
+        this.shoppingCart = new ShoppingCart();
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -123,13 +135,15 @@ public class Customer implements Serializable {
         this.phone = phone;
     }
 
-    public Address getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
     }
+
+
 
     public List<Account> getAccount() {
         return account;

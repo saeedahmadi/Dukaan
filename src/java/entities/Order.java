@@ -5,10 +5,13 @@
  */
 package entities;
 
+import commons.OrderPriceCalculator;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +23,9 @@ import javax.persistence.Temporal;
  *
  * @author Saeed Ahmadi
  */
-@Entity
+@Entity(name = "COrder")
+@EntityListeners(OrderPriceCalculator.class)
+
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -30,6 +35,15 @@ public class Order implements Serializable {
     private Date orderDate;
     private double salesTax;
     private double totalPrice;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="order_id")
+    private List<LineItem> lineItems;
+    public Order() {
+        this.salesTax=9.5;
+        this.orderDate=new Date();
+    }
+    
+    
 
     public Date getOrderDate() {
         return orderDate;
@@ -40,6 +54,7 @@ public class Order implements Serializable {
     }
 
     public double getSalesTax() {
+        
         return salesTax;
     }
 
@@ -48,6 +63,11 @@ public class Order implements Serializable {
     }
 
     public double getTotalPrice() {
+       /* this.totalPrice=0.0;
+        for(LineItem li : lineItems){
+            this.totalPrice=+li.getPrice();
+        }
+        return this.totalPrice+=((totalPrice*getSalesTax())/100);*/
         return totalPrice;
     }
 
@@ -62,9 +82,7 @@ public class Order implements Serializable {
     public void setLineItems(List<LineItem> lineItems) {
         this.lineItems = lineItems;
     }
-    @OneToMany
-    @JoinColumn(name="order_id")
-    private List<LineItem> lineItems;
+    
     
     public Long getId() {
         return id;

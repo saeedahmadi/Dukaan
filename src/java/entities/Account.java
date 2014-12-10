@@ -7,10 +7,12 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -25,11 +27,27 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     private Address address;
-    private long accountNumber;
+    private String accountNumber;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date expiryDate;
+    
+    @ManyToOne
+    Customer customer;
+    public Account() {
+        address = new Address();
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+    
+    
 
     public Address getAddress() {
         return address;
@@ -39,11 +57,11 @@ public class Account implements Serializable {
         this.address = address;
     }
 
-    public long getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(long accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 

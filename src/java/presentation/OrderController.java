@@ -1,11 +1,15 @@
 package presentation;
 
+import Boundary.CustomerFacade;
 import entities.Order;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.OrderFacade;
+import entities.Customer;
+import entities.LineItem;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -78,12 +82,24 @@ public class OrderController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
-
+    @EJB 
+    CustomerFacade customerFacade;
     public String create() {
         try {
-            getFacade().create(current);
+            FacesContext context = FacesContext.getCurrentInstance();
+            Customer customer =(Customer) context.getExternalContext().getSessionMap().get("customer");
+            Order order = new Order();
+            order.setLineItems(customer.getShoppingCart().getLineItems());
+            customer.getShoppingCart().setLineItems(new ArrayList<LineItem>());
+            customer.getOrders().add(order);
+            customer = customerFacade.edit(customer);
+            customer.getUser().setLoginStatus(true);
+            context.getExternalContext().getSessionMap().put("customer", customer);
+            context.getExternalContext().getSessionMap().put("shoppingCart", customer.getShoppingCart());
+
+            //getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OrderCreated"));
-            return prepareCreate();
+            return "/home";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

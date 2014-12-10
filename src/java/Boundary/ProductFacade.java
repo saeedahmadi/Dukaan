@@ -6,6 +6,7 @@
 package Boundary;
 
 import entities.Product;
+import interceptors.LoggingInterceptor;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Saeed Ahmadi
  */
 @Stateless
+
 public class ProductFacade extends AbstractFacade<Product> {
     @PersistenceContext(unitName = "DukaanPU")
     private EntityManager em;

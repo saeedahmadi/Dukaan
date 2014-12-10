@@ -7,9 +7,11 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Default Title</ui:insert></title>
+         <ui:insert name="jquery"></ui:insert>
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
         <h:outputStylesheet library="css" name="shop-homepage.css"/>
 
+  
     </h:head>
 
     <h:body>
@@ -19,6 +21,7 @@
 		  <ui:include src="/commonHeader.html" />
 		</ui:insert>
 	</div>
+        <div id="content" >
         <h1>
             <ui:insert name="title">Default Title</ui:insert>
         </h1>
@@ -26,12 +29,12 @@
             <ui:insert name="body">Default Body</ui:insert>
              
         </p>
-        
+        </div>
         <div id="footer">
 	    	<ui:insert name="footer" >
 	    	  <ui:include src="/commonFooter.html" />
 	    	</ui:insert>
     	</div>
+        
     </h:body>
-
 </html>
