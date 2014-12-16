@@ -109,17 +109,25 @@ public class CategoryController implements Serializable {
          
     }
     private void addPoints(){
+        boolean p = FacesContext.getCurrentInstance().
+            getExternalContext().getRequestParameterMap().containsKey("tid");
         
-        if(!FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("tid")){
-            Map<String, String> params =FacesContext.getCurrentInstance().
-            getExternalContext().getRequestParameterMap();
-            String tid = params.get("tid");
-            Affiliate temp = affiliateFacade.find(tid);
-            temp.setPoints(temp.getPoints()+1);
-            affiliateFacade.edit(temp);
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tid", tid);
+        if(p){ 
+            if(!FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("tid")){
+                Map<String, String> params =FacesContext.getCurrentInstance().
+                getExternalContext().getRequestParameterMap();
+                String tid = params.get("tid");
+                
+                    
+                    Affiliate temp = affiliateFacade.find(tid);
+                    if(temp!=null){
+                    temp.setPoints(temp.getPoints()+1);
+                    affiliateFacade.edit(temp);
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tid", tid);
+                    }
+                
+            }
         }
-        
         
     }
     public String prepareCreate() {
