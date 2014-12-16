@@ -5,6 +5,7 @@ import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.CustomerFacade;
 import Boundary.WebUserFacade;
+import commons.EmailSender;
 import entities.Address;
 import entities.ShoppingCart;
 import entities.WebUser;
@@ -21,6 +22,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import presentation.util.EmailRSClient;
 
 @ManagedBean(name = "customerController")
 @SessionScoped
@@ -92,6 +94,9 @@ public class CustomerController implements Serializable {
         getFacade().edit(customer);
         return "/home";
     }
+    @EJB 
+    EmailRSClient emailSender;
+   
     public String create() {
         
         try {
@@ -103,7 +108,9 @@ public class CustomerController implements Serializable {
             current.getAddress().add(address);
             current = getFacade().edit(current);
             current.getUser().setLoginStatus(true);
-            
+            emailSender.sendEmail("mumyogastudio@gmail.com", 
+                 "Account Succesfully Created : "+current.getUser().getUsername(),"Welcome", 
+                 current.getEmail());
 
             context.getExternalContext().getSessionMap().put("customer", current);
             context.getExternalContext().getSessionMap().put("shoppingCart", current.getShoppingCart());

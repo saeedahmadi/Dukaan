@@ -1,12 +1,15 @@
 package presentation;
 
+import Boundary.AffiliateFacade;
 import entities.Category;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.CategoryFacade;
+import entities.Affiliate;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -93,13 +96,31 @@ public class CategoryController implements Serializable {
     Category testCategory;
     
     public Category selectCategory(Object id){
+       
         testCategory = getFacade().find(id);
         return testCategory;
     }
     
+    @EJB
+    AffiliateFacade affiliateFacade;
     public List<Category> getCategories(){
+       addPoints();
        return  getFacade().findAll();
          
+    }
+    private void addPoints(){
+        
+        if(!FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("tid")){
+            Map<String, String> params =FacesContext.getCurrentInstance().
+            getExternalContext().getRequestParameterMap();
+            String tid = params.get("tid");
+            Affiliate temp = affiliateFacade.find(tid);
+            temp.setPoints(temp.getPoints()+1);
+            affiliateFacade.edit(temp);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tid", tid);
+        }
+        
+        
     }
     public String prepareCreate() {
         current = new Category();

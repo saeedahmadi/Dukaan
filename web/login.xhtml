@@ -11,11 +11,11 @@
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
             </h:panelGroup>
        
        <h:form id="loginForm">
-           <h:messages style="color:red"></h:messages>
            
             <p:panel header="Login" style="width: 360px;">
  
@@ -38,8 +38,8 @@
                     <p:message for="password"></p:message>
  
                     <p:spacer></p:spacer>
- 
-                    <p:commandButton action="#{webUserController.authenticate()}" value="Login" ></p:commandButton>
+
+                    <p:commandButton id="login" action="#{webUserController.authenticate()}" value="Login" ></p:commandButton>
  
                 </h:panelGrid>
  

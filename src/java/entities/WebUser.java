@@ -5,10 +5,12 @@
  */
 package entities;
 
+import commons.PasswordEncrypt;
 import commons.Role;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +23,8 @@ import javax.persistence.Transient;
  * @author Saeed Ahmadi
  */
 @Entity
+@EntityListeners(PasswordEncrypt.class)
+
 public class WebUser implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -238,8 +238,10 @@ public class WebUserController implements Serializable {
    
     public String authenticate() throws Exception{
         WebUser user = getFacade().find(current.getUsername(),current.getPassword());
+        //WebUser user=null;
         if(user==null){
-            JsfUtil.addSuccessMessage("Bad username or password");
+            //JsfUtil.addSuccessMessage("Bad username or password");
+            JsfUtil.addErrorMessage("Bad username or password");
             return "login";
 
         }
@@ -257,10 +259,13 @@ public class WebUserController implements Serializable {
     
     public String logout(){
 
-         FacesContext context = FacesContext.getCurrentInstance();
+         /*FacesContext context = FacesContext.getCurrentInstance();
          context.getExternalContext().getSessionMap().remove("shoppingCart");
-         context.getExternalContext().getSessionMap().remove("customer");
+         context.getExternalContext().getSessionMap().remove("customer");*/
         //((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession()).invalidate();
+            FacesContext context = FacesContext.getCurrentInstance();  
+            HttpSession session = (HttpSession) context.getExternalContext().getSession(false);  
+            session.invalidate(); 
         
         return "/login";
     }

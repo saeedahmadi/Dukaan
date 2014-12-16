@@ -54,7 +54,7 @@
                         <h:link value="Edit Profile" outcome="/customer/EditProfile" id="editProfile"  rendered="#{customer.user.loginStatus}"  immediate="true"/>
                     </li>
                     <li>
-                        <h:commandLink action="#{webUserController.logout()}" id="affiliate" value="Become Affiliate" rendered="#{customer.user.role=='Customer'}"  immediate="true"/>
+                        <h:link outcome="/affiliate/CreateAffiliate" id="affiliate" value="Become Affiliate" rendered="#{customer.user.role=='Customer'}"  immediate="true"/>
                     </li>
                 </ul>
                 </h:form>

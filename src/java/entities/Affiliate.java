@@ -5,8 +5,10 @@
  */
 package entities;
 
+import commons.TrackingIdGenerator;
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,16 +18,23 @@ import javax.persistence.Id;
  * @author Saeed Ahmadi
  */
 @Entity
+@EntityListeners(TrackingIdGenerator.class)
 public class Affiliate implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private double balance;
-    private long trackingid;
+    private String trackingid;
     private long points;
     private String website;
     private String businesType;
+    private String bankAccount;
+    private String payeeName;
+    private String bankName;
+    private String routingNumber;
+    
+    
 
     public double getBalance() {
         return balance;
@@ -35,14 +44,47 @@ public class Affiliate implements Serializable {
         this.balance = balance;
     }
 
-    public long getTrackingid() {
+    public String getTrackingid() {
         return trackingid;
     }
 
-    public void setTrackingid(long trackingid) {
+    public void setTrackingid(String trackingid) {
         this.trackingid = trackingid;
     }
 
+    public String getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    public String getPayeeName() {
+        return payeeName;
+    }
+
+    public void setPayeeName(String payeeName) {
+        this.payeeName = payeeName;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getRoutingNumber() {
+        return routingNumber;
+    }
+
+    public void setRoutingNumber(String routingNumber) {
+        this.routingNumber = routingNumber;
+    }
+
+  
     public long getPoints() {
         return points;
     }
