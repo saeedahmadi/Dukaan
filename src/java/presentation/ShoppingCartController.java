@@ -5,7 +5,6 @@ import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.ShoppingCartFacade;
 import entities.Customer;
-import entities.LineItem;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -247,6 +246,6 @@ public class ShoppingCartController implements Serializable {
                  break;
              }
          }*/
-        return "/shoppingCart/ViewShoppingCart";
+        return "/user/shoppingCart/ViewShoppingCart";
     }
 }

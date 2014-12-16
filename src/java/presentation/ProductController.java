@@ -56,7 +56,7 @@ public class ProductController implements Serializable {
     public String find(String id){
        
        currentProduct = ejbFacade.find(Long.parseLong(id));
-       return "category/ViewProduct";
+       return "/user/category/ViewProduct";
     }
 
     private ProductFacade getFacade() {
@@ -282,10 +282,10 @@ public class ProductController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
 
         if(!context.getExternalContext().getSessionMap().containsKey("customer")){
-            return "/customer/CreateCustomer";
+            return "/user/customer/CreateCustomer";
         }
         
-        return "/order/OrderConfirm";
+        return "/user/order/OrderConfirm";
     }
 
     public LineItem getLineItem() {

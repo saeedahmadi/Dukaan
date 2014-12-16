@@ -5,12 +5,11 @@ import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.WebUserFacade;
 import commons.EmailSender;
-import interceptors.LoggingInterceptor;
+import commons.Role;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -20,7 +19,6 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.interceptor.Interceptors;
 import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "webUserController")
@@ -254,6 +252,8 @@ public class WebUserController implements Serializable {
          context.getExternalContext().getSessionMap().put("shoppingCart", user.getCustomer().getShoppingCart());
          emailSender.sendEmail("Hello", "Login Successful", 
                  user.getCustomer().getEmail(), "mumyogastudio@gmail.com");
+        if(user.getRole().equals(Role.Admin))
+            return "/admin/home";
         return "home";
     }
     

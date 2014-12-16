@@ -39,10 +39,10 @@
                         <a href="#">Contact</a>
                     </li>
                     <li> 
-                        <h:link value="Shopping Cart #{shoppingCart.size()}" outcome="/shoppingCart/ViewShoppingCart"></h:link>
+                        <h:link value="Shopping Cart #{shoppingCart.size()}" outcome="/user/shoppingCart/ViewShoppingCart"></h:link>
                     </li>
                     <li> 
-                        <h:link value="Welcome #{customer.user.username}" rendered="#{customer.user.loginStatus}" outcome="/shoppingCart/ViewShoppingCart"></h:link>
+                        <h:link value="Welcome #{customer.user.username}" rendered="#{customer.user.loginStatus}" outcome="/user/shoppingCart/ViewShoppingCart"></h:link>
                     </li>
                     <li>
                         <h:link value="Login" outcome="/login" rendered="#{!customer.user.loginStatus}"></h:link>
@@ -51,10 +51,10 @@
                         <h:commandLink action="#{webUserController.logout()}" id="logout" value="Logout" rendered="#{customer.user.loginStatus}"  immediate="true"/>
                     </li>
                        <li>
-                        <h:link value="Edit Profile" outcome="/customer/EditProfile" id="editProfile"  rendered="#{customer.user.loginStatus}"  immediate="true"/>
+                        <h:link value="Edit Profile" outcome="/user/customer/EditProfile" id="editProfile"  rendered="#{customer.user.loginStatus}"  immediate="true"/>
                     </li>
                     <li>
-                        <h:link outcome="/affiliate/CreateAffiliate" id="affiliate" value="Become Affiliate" rendered="#{customer.user.role=='Customer'}"  immediate="true"/>
+                        <h:link outcome="/user/affiliate/CreateAffiliate" id="affiliate" value="Become Affiliate" rendered="#{customer.user.role=='Customer'}"  immediate="true"/>
                     </li>
                 </ul>
                 </h:form>

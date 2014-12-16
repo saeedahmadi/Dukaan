@@ -116,12 +116,12 @@ public class CustomerController implements Serializable {
             context.getExternalContext().getSessionMap().put("shoppingCart", current.getShoppingCart());
 
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CustomerCreated"));
-            return "/account/CreateAccount";
+            return "/user/account/CreateAccount";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
            
         }
-         return "/account/CreateAccount";
+         return "/user/account/CreateAccount";
     }
 
     public String prepareEdit() {

@@ -8,7 +8,6 @@ package restricted;
 import commons.Role;
 import entities.Customer;
 import java.io.IOException;
-import java.util.logging.LogRecord;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Saeed Ahmadi
  */
-@WebFilter("/faces/shoppingCart/*")
+@WebFilter("/faces/admin/*")
 public class AuthenticationFilter implements Filter {
   private FilterConfig config;
   
@@ -42,7 +41,7 @@ public class AuthenticationFilter implements Filter {
        "customer");
         customer.getUser().getRole();
         if(customer.getUser().getRole()!=Role.Admin){
-        ((HttpServletResponse) resp).sendRedirect("/Dukaan/faces/login.xhtml");
+        ((HttpServletResponse) resp).sendRedirect("/Dukaan/faces/home.xhtml");
         }
         else {
              chain.doFilter(req, resp);

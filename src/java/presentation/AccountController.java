@@ -92,7 +92,7 @@ public class AccountController implements Serializable {
             //customerFacade.edit(customer);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AccountCreated"));
-            return "/order/OrderConfirm";
+            return "/user/order/OrderConfirm";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
