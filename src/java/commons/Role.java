@@ -11,6 +11,6 @@ package commons;
  */
 public enum Role {
     
-    Customer,Default,Affiliate
+    Customer,Admin,Affiliate,Default
     
 }
