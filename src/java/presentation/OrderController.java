@@ -99,7 +99,7 @@ public class OrderController implements Serializable {
 
             //getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OrderCreated"));
-            return "/home";
+            return "/home.xhtml";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

@@ -7,7 +7,7 @@ package presentation.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import rest.Email;
+import restwebservices.Email;
 
 /**
  *

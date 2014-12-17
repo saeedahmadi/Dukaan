@@ -45,7 +45,7 @@ public class Customer implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="customer_id")
     private List<Order> orders;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Affiliate affilate;
     
     

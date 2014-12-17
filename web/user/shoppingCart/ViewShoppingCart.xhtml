@@ -13,40 +13,57 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <h:form>
-                     <h:outputLabel value="Total Price: " />
-                     <h:outputText value="#{shoppingCart.totalPrice}$" title="Total Price"/>
-                <ui:repeat value="#{shoppingCart.lineItems}" var="item" varStatus="status">
+                <table class="table cart table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Image </th>
+                            <th>Product </th>
+                            <th>Remove </th>
+                            <th>Quantity</th>
+                            <th>Price </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat value="#{shoppingCart.lineItems}" var="item" varStatus="status">
+                        <tr class="remove-data">
+                            <td><img src="#{item.product.url}" width="200" height="171"/></td>
+                            <td class="product">
+                                <h:outputText value="#{item.product.name}" title="#{bundle.ViewProductTitle_name}"/>
+                                <br/>
+                                <small>-<h:outputText value="#{bundle.ViewProductLabel_category}"/>: <h:outputText value="#{item.product.category.title}" title="#{bundle.ViewProductTitle_category}"/></small>
+                            </td>
+                            
+                            <td class="remove"><h:commandLink styleClass="btn btn-group btn-gray btn-sm" action="#{shoppingCartController.remove(status.index)}" value="Remove"/></td>
+                            <td class="quantity">
+                               <h:outputText value="#{item.quantity}" title="#{bundle.ViewProductTitle_name}"/>											
+                            </td>
+                            
+                            <td class="amount"><h:outputText value="#{item.price}" title="#{bundle.ViewProductTitle_price}"/> </td>
+                            
+                        </tr>
+                        </ui:repeat>
+                        
+                        <tr>
+                            <td class="total-quantity" colspan="4"></td>
+                            <td class="total-amount"><h:outputText value="#{shoppingCart.totalPrice}$" title="Total Price"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+ </h:form>
 
-                
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{item.product.name}" title="#{bundle.ViewProductTitle_name}"/>
-                    <h:graphicImage value="#{item.product.url}" width="200" height="171"/>
-                    <h:outputText value="#{bundle.ViewProductLabel_category}"/>
-                    <h:outputText value="#{item.product.category.title}" title="#{bundle.ViewProductTitle_category}"/>
-                    <h:outputText value="Quantity"/>
-                    <h:outputText value="#{item.quantity}" title="#{bundle.ViewProductTitle_name}"/>
-                    <h:outputText value="#{bundle.ViewProductLabel_description}"/>
-                    <h:outputText value="#{item.product.description}" title="#{bundle.ViewProductTitle_description}"/>
-                    <h:outputText value="#{bundle.ViewProductLabel_price}"/>
-                    <h:outputText value="#{item.price}" title="#{bundle.ViewProductTitle_price}"/>
-                    <h:commandLink action="#{shoppingCartController.remove(status.index)}" value="Remove"/>
-
+<div class="text-right">	
+    <h:link styleClass="btn btn-group btn-gray btn-sm" outcome="#{productController.checkOut()}" value="CheckOut"/>
+								
+							</div>
+             
                     
-                </h:panelGrid>
-                </ui:repeat>
-                <br />
-                <h:link outcome="#{productController.checkOut()}" value="CheckOut"/>
-                <br />
-                <br />
-                
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewProductIndexLink}"/>
+                    
 
-            </h:form>
+               
             </div>    
-            
+
         </ui:define>
     </ui:composition>
 

@@ -14,31 +14,67 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{productController.currentProduct.name}" title="#{bundle.ViewProductTitle_name}"/>
-                    <h:graphicImage value="#{item.url}" width="200" height="171"/>
-                    <h:outputText value="#{bundle.ViewProductLabel_category}"/>
-                    <h:outputText value="#{productController.currentProduct.category}" title="#{bundle.ViewProductTitle_category}"/>
-                    <h:outputText value="#{bundle.ViewProductLabel_name}"/>
-                    <h:outputText value="#{productController.currentProduct.name}" title="#{bundle.ViewProductTitle_name}"/>
-                    <h:outputText value="#{bundle.ViewProductLabel_description}"/>
-                    <h:outputText value="#{productController.currentProduct.description}" title="#{bundle.ViewProductTitle_description}"/>
-                    <h:outputText value="#{bundle.ViewProductLabel_price}"/>
-                    <h:outputText value="#{productController.currentProduct.price}" title="#{bundle.ViewProductTitle_price}"/>
-                    <h:outputText value="#{bundle.ViewProductLabel_id}"/>
-                    <h:outputText value="#{productController.currentProduct.id}" title="#{bundle.ViewProductTitle_id}"/>
-                    <h:outputLabel value="#{bundle.CreateLineItemLabel_quantity}" for="quantity" />
-                    <h:inputText id="quantity" value="#{productController.lineItem.quantity}" title="#{bundle.CreateLineItemTitle_quantity}" />
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{productController.addToCart()}" value="AddToCart"/>
-                <br />
-                <br />
+               
                 
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewProductIndexLink}"/>
+                
 
-            </h:form>
+            
+
+
+            <div id="content" class="col-sm-9">      <div class="row">
+                    <div class="col-sm-6">
+                        <div class="thumbnails">
+                            <a class="thumbnail"  title="MacBook">
+                            <img src="#{item.url}" />    
+                            </a>
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+
+                        <h1><h:outputText value="#{productController.currentProduct.name}" title="#{bundle.ViewProductTitle_name}"/></h1>
+                        
+                        <ul class="list-unstyled">
+                            <li>
+                                <h2>$<h:outputText value="#{productController.currentProduct.price}" title="#{bundle.ViewProductTitle_price}"/></h2>
+                            </li>
+                            
+                        </ul>
+                        <div id="product">
+                            <div class="form-group">
+                                <label class="control-label" for="input-quantity">Qty:</label>
+                                
+                                <h:inputText styleClass="form-control" id="quantity" value="#{productController.lineItem.quantity}" title="#{bundle.CreateLineItemTitle_quantity}" />
+                                <br/>
+                                
+                                <h:commandLink styleClass="btn btn-primary btn-lg btn-block" action="#{productController.addToCart()}" value="AddToCart"/>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div>
+                         <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
+                            <li><a href="#tab-specification" data-toggle="tab">Specification</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-description">
+                                <h:outputText value="#{productController.currentProduct.description}" title="#{bundle.ViewProductTitle_description}"/>
+                            </div>
+                            <div class="tab-pane" id="tab-specification">
+                                Specification Description:
+                                <h:outputText value="#{productController.currentProduct.description}" title="#{bundle.ViewProductTitle_description}"/>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+</h:form>
+
         </ui:define>
     </ui:composition>
 

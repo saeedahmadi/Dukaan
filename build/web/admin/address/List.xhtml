@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/admin_template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListAddressTitle}"></h:outputText>
         </ui:define>
@@ -70,8 +70,7 @@
                 </h:panelGroup>
                 <br />
                 <h:commandLink action="#{addressController.prepareCreate}" value="#{bundle.ListAddressCreateLink}"/>
-                <br />
-                <br />
+               
                 <h:link outcome="/index" value="#{bundle.ListAddressIndexLink}"/>
             </h:form>
         </ui:define>

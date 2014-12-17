@@ -26,13 +26,8 @@
                     
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{affiliateController.create}" value="#{bundle.CreateAffiliateSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{affiliateController.prepareList}" value="#{bundle.CreateAffiliateShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateAffiliateIndexLink}"/>
+                <h:commandLink  styleClass="btn btn-group btn-gray btn-sm" action="#{affiliateController.create}" value="#{bundle.CreateAffiliateSaveLink}" />
+                
             </h:form>
         </ui:define>
     </ui:composition>

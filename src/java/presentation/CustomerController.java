@@ -102,7 +102,9 @@ public class CustomerController implements Serializable {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             ShoppingCart sc =(ShoppingCart) context.getExternalContext().getSessionMap().get("shoppingCart");
-            
+            if (sc==null){
+                sc = new ShoppingCart();
+            }
             //getFacade().create(current);
             current.setShoppingCart(sc);
             current.getAddress().add(address);
@@ -116,6 +118,7 @@ public class CustomerController implements Serializable {
             context.getExternalContext().getSessionMap().put("shoppingCart", current.getShoppingCart());
 
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CustomerCreated"));
+            
             return "/user/account/CreateAccount";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));

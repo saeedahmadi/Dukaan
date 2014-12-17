@@ -6,9 +6,7 @@
 package Boundary;
 
 import entities.WebUser;
-import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
-import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -47,18 +45,19 @@ public class WebUserFacadeTest {
     
     /**
      * Test of find method, of class WebUserFacade.
+     * @throws java.lang.Exception
      */
     @Test
     public void testFind_String_String() throws Exception {
         System.out.println("find");
         String username = "";
         String password = "";
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        WebUserFacade instance = (WebUserFacade)container.getContext().lookup("java:global/classes/WebUserFacade");
-        WebUser expResult = null;
-        WebUser result = instance.find(username, password);
-        assertEquals(expResult, result);
-        container.close();
+        try (EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer()) {
+            WebUserFacade instance = (WebUserFacade)container.getContext().lookup("java:global/classes/WebUserFacade");
+            WebUser expResult = null;
+            WebUser result = instance.find(username, password);
+            assertEquals(expResult, result);
+        }
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

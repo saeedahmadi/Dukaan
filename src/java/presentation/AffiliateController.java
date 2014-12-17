@@ -4,6 +4,8 @@ import entities.Affiliate;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import Boundary.AffiliateFacade;
+import Boundary.CustomerFacade;
+import entities.Customer;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -78,10 +80,17 @@ public class AffiliateController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
-
+    @EJB
+    CustomerFacade customerFacade;
     public String create() {
         try {
-            getFacade().create(current);
+            FacesContext context = FacesContext.getCurrentInstance();
+            Customer customer =(Customer) context.getExternalContext().getSessionMap().get("customer");
+            customer.setAffilate(current);
+            customer=customerFacade.edit(customer);
+            customer.getUser().setLoginStatus(true);
+            context.getExternalContext().getSessionMap().put("customer",customer);
+            //getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AffiliateCreated"));
             return "ViewAffiliate";
         } catch (Exception e) {

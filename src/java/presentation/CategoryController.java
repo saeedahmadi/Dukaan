@@ -95,10 +95,11 @@ public class CategoryController implements Serializable {
     }
     Category testCategory;
     
-    public Category selectCategory(Object id){
+    public String selectCategory(Object id){
        
         testCategory = getFacade().find(id);
-        return testCategory;
+        //return testCategory;
+        return "/user/category/ViewCategory";
     }
     
     @EJB

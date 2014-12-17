@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/admin_template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListAccountTitle}"></h:outputText>
         </ui:define>
@@ -58,10 +58,9 @@
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
-                <br />
+               
                 <h:commandLink action="#{accountController.prepareCreate}" value="#{bundle.ListAccountCreateLink}"/>
-                <br />
-                <br />
+                
                 <h:link outcome="/index" value="#{bundle.ListAccountIndexLink}"/>
             </h:form>
         </ui:define>

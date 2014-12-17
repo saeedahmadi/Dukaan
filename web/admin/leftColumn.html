@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      >
+    <body>
+        <ui:composition>
+
+            <nav id="column-left"><div id="profile">
+                    <div></div>
+                    <div>
+                        <h4> </h4>
+                        <small>Administrator</small></div>
+                </div>
+            <ul id="menu">
+                    <li id="dashboard"><a href="#"><i class="fa fa-dashboard fa-fw"></i> <span>Dashboard</span></a></li>
+                    <li id="catalog"><a class="parent"><i class="fa fa-tags fa-fw"></i> <span>Product</span></a>
+                        <ul>
+                            <li><h:link outcome="/admin/product/List" value="Show All Product Items"/></li>
+                            <li><h:link outcome="/admin/product/Create" value="Create Product"/></li>
+                        </ul>
+                    </li>
+                    <li id="catalog"><a class="parent"><i class="fa fa-tags fa-fw"></i> <span>Category</span></a>
+                        <ul>
+                            <li><h:link outcome="/admin/category/List" value="Show All Category Items"/></li>
+                            <li><h:link outcome="/admin/category/Create" value="Create Category"/></li>
+                        </ul>
+                    </li>
+                     <li id="catalog"><a class="parent"><i class="fa fa-tags fa-fw"></i> <span>Address</span></a>
+                        <ul>
+                            <li><h:link outcome="/admin/address/List" value="Show All Address"/></li>
+                             <li><h:link outcome="/admin/address/Create" value="Create Address"/></li>
+                        </ul>
+                    </li>
+                     <li id="catalog"><a class="parent"><i class="fa fa-tags fa-fw"></i> <span>Account</span></a>
+                        <ul>
+                            <li><h:link outcome="/admin/account/List" value="Show All Account"/></li>
+                            <li><h:link outcome="/admin/account/Create" value="Create Account"/></li>
+                        </ul>
+                    </li>
+                    
+                     <li id="catalog"><a class="parent"><i class="fa fa-tags fa-fw"></i> <span>Affiliate</span></a>
+                        <ul>
+                            <li><h:link outcome="/admin/affiliate/List" value="Show All Affiliates"/></li>
+                            <li><h:link outcome="/admin/affiliate/Create" value="Create Affiliate"/></li>
+                        </ul>
+                    </li>
+                    
+                    <li id="catalog"><a class="parent"><i class="fa fa-tags fa-fw"></i> <span>Customer</span></a>
+                        <ul>
+                            <li><h:link outcome="/admin/customer/List" value="Show All Customer"/></li>
+                            <li><h:link outcome="/admin/customer/Create" value="Create Customer"/></li>
+                        </ul>
+                    </li>
+                    
+                    <li id="catalog"><a class="parent"><i class="fa fa-tags fa-fw"></i> <span>Order</span></a>
+                        <ul>
+                            <li><h:link outcome="/admin/order/List" value="Show All Order"/></li>
+                        </ul>
+                    </li>
+                    
+                   
+
+                </ul>
+
+            </nav>
+        </ui:composition>
+    </body>
+
+</html>

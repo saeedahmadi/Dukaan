@@ -16,31 +16,21 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputText value="#{bundle.ViewAffiliateLabel_balance}"/>
-                    <h:outputText value="#{affiliateController.selected.balance}" title="#{bundle.ViewAffiliateTitle_balance}"/>
+                    <h:outputText value="#{customer.affilate.balance}" title="#{bundle.ViewAffiliateTitle_balance}"/>
                     <h:outputText value="#{bundle.ViewAffiliateLabel_trackingid}"/>
-                    <h:outputText value="http://localhost:8080/Dukaan/faces/home.xhtml?tid=#{affiliateController.selected.trackingid}" 
+                    <h:outputText value="http://localhost:8080/Dukaan/faces/home.xhtml?tid=#{customer.affilate.trackingid}" 
                                   title="#{bundle.ViewAffiliateTitle_trackingid}"/>
                     <h:outputText value="#{bundle.ViewAffiliateLabel_points}"/>
-                    <h:outputText value="#{affiliateController.selected.points}" title="#{bundle.ViewAffiliateTitle_points}"/>
+                    <h:outputText value="#{customer.affilate.points}" title="#{bundle.ViewAffiliateTitle_points}"/>
                     <h:outputText value="#{bundle.ViewAffiliateLabel_website}"/>
-                    <h:outputText value="#{affiliateController.selected.website}" title="#{bundle.ViewAffiliateTitle_website}"/>
+                    <h:outputText value="#{customer.affilate.website}" title="#{bundle.ViewAffiliateTitle_website}"/>
                     <h:outputText value="#{bundle.ViewAffiliateLabel_businesType}"/>
-                    <h:outputText value="#{affiliateController.selected.businesType}" title="#{bundle.ViewAffiliateTitle_businesType}"/>
+                    <h:outputText value="#{customer.affilate.businesType}" title="#{bundle.ViewAffiliateTitle_businesType}"/>
                     <h:outputText value="#{bundle.ViewAffiliateLabel_id}"/>
-                    <h:outputText value="#{affiliateController.selected.id}" title="#{bundle.ViewAffiliateTitle_id}"/>
+                    <h:outputText value="#{customer.affilate.id}" title="#{bundle.ViewAffiliateTitle_id}"/>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{affiliateController.destroyAndView}" value="#{bundle.ViewAffiliateDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewAffiliateEditLink}"/>
-                <br />
-                <h:commandLink action="#{affiliateController.prepareCreate}" value="#{bundle.ViewAffiliateCreateLink}" />
-                <br />
-                <h:commandLink action="#{affiliateController.prepareList}" value="#{bundle.ViewAffiliateShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewAffiliateIndexLink}"/>
+                
 
             </h:form>
         </ui:define>

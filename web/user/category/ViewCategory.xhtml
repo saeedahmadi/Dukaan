@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewProductTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+           
+            <div class="col-md-9">
+
+                <div class="row carousel-holder">
+
+                    <div class="row">
+                        <div class="masonry-grid-fitrows row grid-space-20">
+                        <ui:repeat value="#{categoryController.testCategory.products}" var="item">
+
+                           
+                            
+                            <div class="col-md-4 col-sm-6 masonry-grid-item">
+									<div class="listing-item">
+										<div class="overlay-container">
+                                                                                    <img src="#{item.url}" alt="" style="height: 270px; width: 200px;"/>
+											
+										</div>
+										<div class="listing-item-body clearfix">
+                                                                                    <h3 class="title"><h:form><h:commandLink  action="#{productController.find(item.id)}" value="#{item.name}"></h:commandLink></h:form></h3>
+											
+											<span class="price">$ #{item.price}</span>
+											<div class="elements-list pull-right">
+                                                                                            <i class="fa fa-shopping-cart pr-10"></i><h:form> <h:commandLink  action="#{productController.find(item.id)}" value="View Details"/></h:form>
+											</div>
+										</div>
+									</div>
+								</div>
+                            
+                            
+                            
+                        </ui:repeat>
+                       
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

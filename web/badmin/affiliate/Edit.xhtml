@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAffiliateTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditAffiliateLabel_balance}" for="balance" />
+                    <h:inputText id="balance" value="#{affiliateController.selected.balance}" title="#{bundle.EditAffiliateTitle_balance}" />
+                    <h:outputLabel value="#{bundle.EditAffiliateLabel_trackingid}" for="trackingid" />
+                    <h:inputText id="trackingid" value="#{affiliateController.selected.trackingid}" title="#{bundle.EditAffiliateTitle_trackingid}" />
+                    <h:outputLabel value="#{bundle.EditAffiliateLabel_points}" for="points" />
+                    <h:inputText id="points" value="#{affiliateController.selected.points}" title="#{bundle.EditAffiliateTitle_points}" />
+                    <h:outputLabel value="#{bundle.EditAffiliateLabel_website}" for="website" />
+                    <h:inputText id="website" value="#{affiliateController.selected.website}" title="#{bundle.EditAffiliateTitle_website}" />
+                    <h:outputLabel value="#{bundle.EditAffiliateLabel_businesType}" for="businesType" />
+                    <h:inputText id="businesType" value="#{affiliateController.selected.businesType}" title="#{bundle.EditAffiliateTitle_businesType}" />
+                    <h:outputLabel value="#{bundle.EditAffiliateLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{affiliateController.selected.id}" title="#{bundle.EditAffiliateTitle_id}" />
+                </h:panelGrid>
+                <h:commandLink action="#{affiliateController.update}" value="#{bundle.EditAffiliateSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditAffiliateViewLink}"/>
+                <br />
+                <h:commandLink action="#{affiliateController.prepareList}" value="#{bundle.EditAffiliateShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditAffiliateIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

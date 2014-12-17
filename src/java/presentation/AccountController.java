@@ -20,10 +20,21 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.xml.ws.WebServiceRef;
+import javax.xml.namespace.QName;
+import javax.xml.transform.Source;
+import javax.xml.ws.Dispatch;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.ws.Service;
+import java.io.StringReader;
+import javax.faces.application.FacesMessage;
+//import webserviceclient.CreditCardService_Service;
 
 @ManagedBean(name = "accountController")
 @SessionScoped
 public class AccountController implements Serializable {
+    
+   
 
     private Account current;
     private DataModel items = null;
@@ -92,7 +103,9 @@ public class AccountController implements Serializable {
             //customerFacade.edit(customer);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AccountCreated"));
-            return "/user/order/OrderConfirm";
+            if(customer.getShoppingCart().size()>0)
+                return "/user/order/OrderConfirm";
+            return "/home";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -236,5 +249,28 @@ public class AccountController implements Serializable {
         }
 
     }
+    
+   public String accNo;
+
+    public String getAccNo() {
+        return accNo;
+    }
+    public void setAccNo(String accNo) {
+        
+       /**if(!validateCreditCard(accNo)){
+            getSelected().setAccountNumber(accNo);
+            FacesContext.getCurrentInstance().addMessage("accountNumber",
+                    new FacesMessage("Invalid Credit Card"));
+        }
+            
+        **/
+        this.accNo = accNo;
+    }
+
+    
+    
+
+    
+        
 
 }

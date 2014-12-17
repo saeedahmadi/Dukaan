@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/admin_template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.CreateLineItemTitle}"></h:outputText>
         </ui:define>
@@ -28,11 +28,9 @@
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{lineItemController.create}" value="#{bundle.CreateLineItemSaveLink}" />
-                <br />
-                <br />
+               
                 <h:commandLink action="#{lineItemController.prepareList}" value="#{bundle.CreateLineItemShowAllLink}" immediate="true"/>
-                <br />
-                <br />
+               
                 <h:link outcome="/index" value="#{bundle.CreateLineItemIndexLink}"/>
             </h:form>
         </ui:define>

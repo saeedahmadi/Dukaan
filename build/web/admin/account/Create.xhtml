@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/admin_template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.CreateAccountTitle}"></h:outputText>
         </ui:define>
@@ -30,11 +30,9 @@
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{accountController.create}" value="#{bundle.CreateAccountSaveLink}" />
-                <br />
-                <br />
+               
                 <h:commandLink action="#{accountController.prepareList}" value="#{bundle.CreateAccountShowAllLink}" immediate="true"/>
-                <br />
-                <br />
+                
                 <h:link outcome="/index" value="#{bundle.CreateAccountIndexLink}"/>
             </h:form>
         </ui:define>
